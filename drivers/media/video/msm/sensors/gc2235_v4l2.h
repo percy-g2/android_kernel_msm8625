@@ -1,0 +1,156 @@
+/* Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#include"msm_camera_i2c.h"
+
+#ifndef CAMSENSOR_GC2235_V4L2
+#define CAMSENSOR_GC2235_V4L2
+
+static struct msm_camera_i2c_reg_conf gc2235_start_settings[] = {
+	{0xfe, 0x03},
+    {0x10, 0x94},
+	{0xfe, 0x00},
+};
+
+static struct msm_camera_i2c_reg_conf gc2235_stop_settings[] = {
+	{0xfe, 0x03},
+    {0x10, 0x84},
+	{0xfe, 0x00},
+};
+
+static struct msm_camera_i2c_reg_conf gc2235_prev_settings[] = {};
+
+static struct msm_camera_i2c_reg_conf gc2235_snap_settings[] = {};
+
+static struct msm_camera_i2c_reg_conf gc2235_init_settings[] = {
+	/////////////////////////////////////////////////////
+	//////////////////////	 SYS   //////////////////////
+	/////////////////////////////////////////////////////
+	{0xfe, 0x80},
+	{0xfe, 0x80},
+	{0xfe, 0x80},
+	{0xf2, 0x00}, //sync_pad_io_ebi
+	{0xf6, 0x00}, //up down
+	{0xfc, 0x06},
+	{0xf7, 0x15}, //pll enable
+	{0xf8, 0x86}, //Pll mode 2
+	{0xf9, 0xfe}, //[0] pll enable
+	{0xfa, 0x11}, //div
+	{0xfe, 0x00},
+	
+	/////////////////////////////////////////////////////
+	////////////////   ANALOG & CISCTL	 ////////////////
+	/////////////////////////////////////////////////////
+	{0x03, 0x04},
+	{0x04, 0xb0},
+	{0x05, 0x00},
+	{0x06, 0xe4},
+	{0x07, 0x00},
+	{0x08, 0x1a}, 
+	{0x0a, 0x02},//row start
+	{0x0c, 0x08},//00 ppp
+	{0x0d, 0x04},
+	{0x0e, 0xd0}, 
+	{0x0f, 0x06}, 
+	{0x10, 0x50},
+	{0x17, 0x15},//14 //[0]mirror [1]flip
+	{0x18, 0x12},                            
+	{0x19, 0x06},
+	{0x1a, 0x01},
+	{0x1b, 0x48},
+	{0x1e, 0x88}, 
+	{0x1f, 0x48},
+	{0x20, 0x03},
+	{0x21, 0x6f},
+	{0x22, 0x80}, 
+	{0x23, 0xc1},
+	{0x24, 0x2f},
+	{0x26, 0x01},
+	{0x27, 0x30},
+	{0x3f, 0x00},
+	
+	/////////////////////////////////////////////////////
+	//////////////////////	 ISP   //////////////////////
+	/////////////////////////////////////////////////////
+	{0x8b, 0xa0},
+	{0x8c, 0x02},
+	{0x90, 0x01},
+	{0x92, 0x02},	
+	{0x94, 0x06},
+	{0x95, 0x04},
+	{0x96, 0xb0},
+	{0x97, 0x06},
+	{0x98, 0x40},
+	
+	/////////////////////////////////////////////////////
+	//////////////////////	 BLK   //////////////////////
+	/////////////////////////////////////////////////////
+	{0x40, 0x72},
+	{0x41, 0x04},
+	{0x5e, 0x00},
+	{0x5f, 0x00},
+	{0x60, 0x00},
+	{0x61, 0x00},	
+	{0x62, 0x00},
+	{0x63, 0x00},	
+	{0x64, 0x00},
+	{0x65, 0x00},
+	{0x66, 0x20},
+	{0x67, 0x20},	
+	{0x68, 0x20},
+	{0x69, 0x20},
+	
+	/////////////////////////////////////////////////////
+	//////////////////////	 GAIN	/////////////////////
+	/////////////////////////////////////////////////////
+	{0xb2, 0x00},
+	{0xb3, 0x40},
+	{0xb4, 0x40},
+	{0xb5, 0x40},
+	
+	/////////////////////////////////////////////////////
+	////////////////////   DARK SUN   ///////////////////
+	/////////////////////////////////////////////////////
+	{0xb8, 0x0f},
+	{0xb9, 0x23},
+	{0xba, 0xff},
+	{0xbc, 0x00},
+	{0xbd, 0x00},
+	{0xbe, 0xff},
+	{0xbf, 0x09},
+	/////////////////////////////////////////////////////
+	//////////////////////	 OUTPUT	/////////////////////
+	/////////////////////////////////////////////////////
+	{0xfe, 0x03},
+	{0x01, 0x03},
+	{0x02, 0x11},
+	{0x03, 0x11},
+	{0x06, 0x80},
+	{0x11, 0x2a},
+	{0x12, 0x40},
+	{0x13, 0x06},
+	{0x15, 0x10},
+	{0x04, 0x01},
+	{0x05, 0x00},
+	{0x17, 0x01},
+
+	{0x21, 0x01},
+	{0x22, 0x02},
+	{0x23, 0x01},
+	{0x29, 0x02},
+	{0x2a, 0x01},
+
+	//{0x10, 0x84},
+	{0xfe, 0x00},
+	{0xf2, 0x00},
+};
+#endif

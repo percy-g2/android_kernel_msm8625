@@ -1,0 +1,9 @@
+menu "MTV support"
+
+config TDMB_MTV818
+    tristate "Raontech TDMB/FM/ISDB-T module support"
+    depends on I2C
+    help
+      This enables support for the RAONTECH TDMB module
+
+endmenu
